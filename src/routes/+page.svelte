@@ -1,6 +1,6 @@
 <script>
-	// Import the data.json file and store it in a variable
-	import data from '../data.json';
+	// Imports
+	import data from '$lib/data.json';
 	import { goto } from '$app/navigation';
 </script>
 
