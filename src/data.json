@@ -1,0 +1,20 @@
+[
+   {
+      "carrera":"Ing. Quimica",
+      "slug":"ing-quimica",
+      "materias":[
+         "Analisis Matematico I",
+         "Fisica II",
+         "Otra materia"
+      ]
+   },
+   {
+      "carrera":"Ing. en Alimentos",
+      "slug":"ing-alimentos",
+      "materias":[
+         "Analisis Matematico II",
+         "Fisica I",
+         "Otra materia"
+      ]
+   }
+]
