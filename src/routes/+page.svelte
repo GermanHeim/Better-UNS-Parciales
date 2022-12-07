@@ -1,6 +1,6 @@
 <script>
 	// Imports
-	import data from '$lib/data.json';
+	import data from '$lib/carreras.json';
 	import { goto } from '$app/navigation';
 </script>
 

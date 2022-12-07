@@ -12,9 +12,10 @@
 	import FiGithub from 'svelte-icons-pack/fi/FiGithub';
 	import FiLogIn from 'svelte-icons-pack/fi/FiLogIn';
 	import FiHome from 'svelte-icons-pack/fi/FiHome';
-	import FiMail from 'svelte-icons-pack/fi/FiMail';
 	import FiMenu from 'svelte-icons-pack/fi/FiMenu';
 	import FiLogOut from 'svelte-icons-pack/fi/FiLogOut';
+	import FiArchive from 'svelte-icons-pack/fi/FiArchive';
+	import FiUploadCloud from 'svelte-icons-pack/fi/FiUploadCloud';
 
 	// Skeleton Features
 	import { AppShell, AppBar, AppRail, AppRailTile } from '@skeletonlabs/skeleton';
@@ -34,6 +35,8 @@
 
 	const storeValue = writable(1);
 	export let data;
+
+	// TODO: Fix the logic of the if statement for the signup button (currently doesnt work lol)
 </script>
 
 <Drawer open={storeDrawer} position="left">
@@ -66,41 +69,49 @@
 			<AppRail selected={storeValue}>
 				<svelte:fragment slot="default">
 					<AppRailTile label="Inicio" title="Inicio" value={1} on:click={() => goto(`/`)}
-						><Icon src={FiHome} /></AppRailTile
+						><Icon src={FiHome} size="22" /></AppRailTile
 					>
 					{#if !data.user}
 						<AppRailTile
 							label="Iniciar sesion"
 							title="Iniciar sesion"
 							value={2}
-							on:click={() => goto(`/login`)}><Icon src={FiLogIn} /></AppRailTile
+							on:click={() => goto(`/login`)}><Icon src={FiLogIn} size="22" /></AppRailTile
 						>
 						<AppRailTile
 							label="Registrarse"
 							title="Tile"
 							value={3}
-							on:click={() => goto(`/sign-up`)}><Icon src={FiUserPlus} /></AppRailTile
+							on:click={() => goto(`/sign-up`)}><Icon src={FiUserPlus} size="22" /></AppRailTile
 						>
 					{:else}
 						<AppRailTile label="Cerrar sesion" title="Cerrar sesion" value={6}
-							><Icon src={FiLogOut} />
+							><Icon src={FiLogOut} size="22" />
 						</AppRailTile>
 					{/if}
 					<AppRailTile
-						label="GitHub"
-						title="Github"
+						label="Materias"
+						title="Materias"
 						value={4}
-						on:click={() => goto(`https://github.com/GermanHeim/better-unsparciales`)}
-						><Icon src={FiGithub} /></AppRailTile
+						on:click={() => goto(`/materias`)}><Icon src={FiArchive} size="22" /></AppRailTile
 					>
 					<AppRailTile
-						label="Contacto"
-						title="Contacto"
-						value={5}
-						on:click={() => goto(`/contacto`)}
-						><Icon src={FiMail} />
+						label="Subir un parcial"
+						title="Subir un parcial"
+						value={6}
+						on:click={() => goto(`/subir-un-parcial`)}
+						><Icon src={FiUploadCloud} size="22" />
 					</AppRailTile>
 				</svelte:fragment>
+				<svelte:fragment slot="trail"
+					><AppRailTile
+						label="GitHub"
+						title="Github"
+						value={5}
+						on:click={() => goto(`https://github.com/GermanHeim/better-unsparciales`)}
+						><Icon src={FiGithub} size="22" /></AppRailTile
+					></svelte:fragment
+				>
 			</AppRail>
 		</div>
 	</svelte:fragment>

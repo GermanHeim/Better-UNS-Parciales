@@ -1,6 +1,8 @@
+<!-- TODO: Logica de confirmar contraseña -->
+
 <div class="flex flex-col h-full items-center w-full justify-center">
 	<div class="card card-body">
-		<h1 class="text-center m-4"><strong>Registrarse</strong></h1>
+		<h1 class="text-center m-4"><strong>Registrarte</strong></h1>
 		<p class="text-center m-4">
 			o <a href="/login">inicia sesión</a> si ya tienes una cuenta
 		</p>
@@ -12,6 +14,7 @@
 					name="email"
 					class="form-input px-4 py-3 rounded-lg w-96"
 					placeholder="johndoe@gmail.com"
+					required
 				/>
 			</label>
 
@@ -22,6 +25,7 @@
 					name="password"
 					placeholder="****************"
 					class="form-input px-4 py-3 rounded-lg w-96"
+					required
 				/>
 			</label>
 
@@ -32,6 +36,7 @@
 					name="passwordConfirm"
 					class="form-input px-4 py-3 rounded-lg w-96"
 					placeholder="****************"
+					required
 				/>
 			</label>
 

@@ -15,6 +15,6 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(500, 'Algo salió mal al iniciar sesión');
 		}
-		throw redirect(303, '/')
+		throw redirect(303, '/');
 	}
 };
