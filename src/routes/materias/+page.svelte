@@ -1,13 +1,29 @@
 <script>
 	import { goto } from '$app/navigation';
-	import data_materias from '$lib/materias.json';
+	import data from '$lib/data.json';
+	import { str2slug } from '$lib/utils.js';
 
-	//TODO: Pagination
+	let materiasUnique = [];
+	data.forEach((carrera) => {
+		carrera.materias.forEach((materia) => {
+			materiasUnique.push(materia);
+		});
+	});
+	materiasUnique = [...new Set(materiasUnique)];
+	materiasUnique.sort();
+
+	//TODO: Pagination, style
 </script>
 
-<!-- Generate a button for each materia inside data_materias and, on click, goto data_materias's slug that is stored inside the json -->
-{#each data_materias as materias}
-	<button class="btn btn-primary" on:click={() => goto(materias.slug)}>
-		{materias.materia}
-	</button>
-{/each}
+<div class="">
+	{#each materiasUnique as materia}
+		<ul>
+			<li>
+				<button
+					class="btn bg-primary-500 btn-lg text-white"
+					on:click={() => goto(`/materia/` + str2slug(materia))}>{materia}</button
+				>
+			</li>
+		</ul>
+	{/each}
+</div>

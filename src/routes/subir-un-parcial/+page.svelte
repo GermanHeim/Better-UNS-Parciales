@@ -1,10 +1,18 @@
 <script>
-	import materias from '$lib/materias.json';
+	import data from '$lib/data.json';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
-	import Icon from 'svelte-icons-pack';
 	let archivos;
 
-	// TODO: Add logics
+	let materiasUnique = [];
+	data.forEach((carrera) => {
+		carrera.materias.forEach((materia) => {
+			materiasUnique.push(materia);
+		});
+	});
+	materiasUnique = [...new Set(materiasUnique)];
+	materiasUnique.sort();
+
+	// TODO: Add logics, better style, change file drop lang
 </script>
 
 <div class="overflow-hidden h-full">
@@ -23,14 +31,13 @@
 					<label for="materia" class="flex flex-col">
 						Materia*
 						<select class="form-input px-4 py-2 rounded-lg w-72" name="materia">
-							<!-- Create an option tag for every materia in materia.json -->
-							{#each materias as materia}
-								<option value={materia.materia}>{materia.materia}</option>
+							{#each materiasUnique as materia}
+								<option value={materia}>{materia}</option>
 							{/each}
 						</select>
 					</label>
 					<label for="tipo" class="flex flex-col">
-						Tipo de evaluación
+						Tipo de evaluación*
 						<select class="form-input px-4 py-2 rounded-lg w-72" name="tipo">
 							<option value="parcial">Parcial</option>
 							<option value="final regular">Final regular</option>
@@ -40,7 +47,7 @@
 						</select>
 					</label>
 					<label for="numero" class="flex flex-col">
-						Numero
+						Número*
 						<input
 							type="number"
 							name="numero"
@@ -84,12 +91,16 @@
 						/></label
 					>
 					<label for="archivos" class="flex flex-col">
-						Achivos
-						<FileDropzone bind:archivos notes="Los archivos no deben exceder los 5mb." />
+						Archivos*
+						<FileDropzone
+							bind:archivos
+							multiple
+							notes="Los archivos no deben exceder los 5mb.</br>Tipos de archivos: PDF, DOCX, DOC, JPG, JPEG, PNG."
+						/>
 					</label>
 				</div>
 				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full"
-					>Subir archivo</button
+					>Subir parcial</button
 				>
 			</form>
 		</div>

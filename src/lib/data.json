@@ -1,12 +1,10 @@
 [
    {
       "carrera":"Ing. Quimica",
-      "slug":"ing-quimica",
       "materias":["Algebra y Geometria", "Analisis Matematico I", "Analisis Matematico II", "Diagnostico y Nivelacion Matematica", "Dinamica y Control de Procesos", "Diseño y Evaluacion Economica de Procesos", "Equipos para Procesos", "Estudio de los Materiales", "Fisica I", "Fisica II", "Fisicoquimica para Ingenieros Quimicos", "Fundamentos de Quimica Organica", "Fundamentos de la Ingenieria Quimica", "Idioma de Ing Química, Plan 2002", "Ingenieria Electroquimica y Corrosion", "Ingenieria y Gestion Ambiental", "Introduccion a los Bioprocesos", "Laboratorio de Fenomenos de Transporte", "Laboratorio de Ingenieria Quimica", "Laboratorio de Procesos Quimicos", "Mecanica de Fluidos", "Metodos Teoricos en Ingenieria A", "Metodos Teoricos en Ingenieria B", "Practica Profesional Supervisada", "Procesos de Separacion", "Proyecto Final de Carrera", "Quimica General para Ingenieria", "Quimica Inorganica para Ingenieria", "Reactores Quimicos y Biologicos", "Sistemas de Representacion", "Termodinamica Quimica para Ingenieria", "Transferencia de Calor y Masa"]
    },
    {
       "carrera":"Ing. en Alimentos",
-      "slug":"ing-alimentos",
       "materias":["Algebra y Geometria", "Almacenamiento y Envasado de Alimentos", "Analisis Matematico I", "Analisis Matematico II", "Biologia General", "Diagnostico y Nivelacion Matematica", "Dinamica y Control de Procesos", "Diseño y Evaluacion Economica de Procesos", "Equipos para Procesos", "Fisica I", "Fisica II", "Fundamentos de la Ingenieria Quimica", "Idioma de Ing en Alimentos, Plan 2002", "Ingenieria y Gestion Ambiental", "Laboratorio de Fenomenos de Transporte", "Laboratorio de Ingenieria de Alimentos", "Laboratorio de Procesamiento de Alimentos", "Mecanica de Fluidos", "Metodos Teoricos en Ingenieria A", "Metodos Teoricos en Ingenieria B", "Microbiologia Industrial y de los Alimentos", "Practica Profesional Supervisada", "Procesamiento de Alimentos I", "Procesamiento de Alimentos II", "Produccion Primaria de Alimentos", "Proyecto Final de Carrera", "Quimica General para Ingenieria", "Quimica Inorganica para Ingenieria", "Quimica Organica General", "Quimica de los Alimentos", "Reactores Quimicos y Biologicos", "Sistemas de Representacion", "Termodinamica Quimica para Ingenieria", "Transferencia de Calor y Masa"]
    }
 ]
