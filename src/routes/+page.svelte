@@ -2,16 +2,20 @@
 	import data from '$lib/data.json';
 	import { goto } from '$app/navigation';
 	import { str2slug } from '$lib/utils.js';
+
+	//TODO: invert a tag in divs
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	{#each data as data}
+<div class="px-8 py-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+	{#each data as carrera}
 		<ul>
 			<li>
-				<button
-					class="btn bg-primary-500 btn-lg text-white"
-					on:click={() => goto(`/carrera/` + str2slug(data.carrera))}>{data.carrera}</button
+				<div
+					class="flex h-24 bg-primary-600 cursor-pointer justify-center items-center text-center rounded-lg hover:bg-primary-500"
+					on:click={() => goto(`/carrera/${str2slug(carrera.carrera)}`)}
 				>
+					<p>{carrera.carrera}</p>
+				</div>
 			</li>
 		</ul>
 	{/each}

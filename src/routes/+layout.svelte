@@ -20,6 +20,7 @@
 	// Skeleton Features
 	import { AppShell, AppBar, AppRail, AppRailTile } from '@skeletonlabs/skeleton';
 	import { Drawer } from '@skeletonlabs/skeleton';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
 
 	// Local Features
 	import Navigation from '$lib/Navigation/Navigation.svelte';
@@ -59,6 +60,9 @@
 					</button>
 					<h1 class="text-xl"><strong>Better UNSParciales</strong></h1>
 				</div>
+			</svelte:fragment>
+			<svelte:fragment slot="trail">
+				<div class="flex items-center"><LightSwitch /></div>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
@@ -104,14 +108,15 @@
 					</AppRailTile>
 				</svelte:fragment>
 				<svelte:fragment slot="trail"
-					><AppRailTile
+					><AppRailTile title="Lightswitch"><LightSwitch /></AppRailTile>
+					<AppRailTile
 						label="GitHub"
-						title="Github"
+						title="GitHub"
 						value={5}
 						on:click={() => goto(`https://github.com/GermanHeim/better-unsparciales`)}
 						><Icon src={FiGithub} size="22" /></AppRailTile
-					></svelte:fragment
-				>
+					>
+				</svelte:fragment>
 			</AppRail>
 		</div>
 	</svelte:fragment>

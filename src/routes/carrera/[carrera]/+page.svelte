@@ -10,23 +10,28 @@
 		const carrera = data.find((carrera) => str2slug(carrera.carrera) === slug);
 		carrera_actual = carrera.carrera;
 	}
+
+	//TODO: Invert a tags in div
 </script>
 
 <svelte:head>
 	<title>{carrera_actual} - Better UNSParciales</title>
 </svelte:head>
 
-<!-- Titulo de la carrera -->
-<h1>{carrera_actual}</h1>
+<h1 class="text-center pt-10 pb-5">{carrera_actual}</h1>
 
-<!-- Botones -->
-{#each data as data}
-	{#if data.carrera === carrera_actual}
-		{#each data.materias as materia}
-			<button
-				class="btn bg-primary-500 btn-lg text-white"
-				on:click={() => goto(`/materias/` + str2slug(materia))}>{materia}</button
-			>
-		{/each}
-	{/if}
-{/each}
+<div class="px-8 py-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+	{#each data.find((carrera) => str2slug(carrera.carrera) === $page.params.carrera).materias as materia}
+		<ul>
+			<li>
+				<!-- Create a div with an a tag with the respective href -->
+				<div
+					class="flex h-24 bg-primary-600 cursor-pointer justify-center items-center text-center rounded-lg hover:bg-primary-500"
+					on:click={() => goto(`/materias/${str2slug(materia)}`)}
+				>
+					<p>{materia}</p>
+				</div>
+			</li>
+		</ul>
+	{/each}
+</div>

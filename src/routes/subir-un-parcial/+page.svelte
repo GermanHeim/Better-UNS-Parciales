@@ -1,7 +1,7 @@
 <script>
 	import data from '$lib/data.json';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
-	let archivos;
+	let files;
 
 	let materiasUnique = [];
 	data.forEach((carrera) => {
@@ -65,16 +65,6 @@
 						/>
 					</label>
 
-					<label for="asistente" class="flex flex-col">
-						Asistente
-						<input
-							type="text"
-							name="asistente"
-							placeholder="Nombre del asistente"
-							class="form-input px-4 py-2 rounded-lg w-72"
-						/>
-					</label>
-
 					<label for="fecha" class="flex flex-col">
 						Fecha <input
 							type="date"
@@ -90,15 +80,16 @@
 							class="form-input px-4 py-2 rounded-lg w-72"
 						/></label
 					>
-					<label for="archivos" class="flex flex-col">
-						Archivos*
-						<FileDropzone
-							bind:archivos
-							multiple
-							notes="Los archivos no deben exceder los 5mb.</br>Tipos de archivos: PDF, DOCX, DOC, JPG, JPEG, PNG."
-						/>
-					</label>
 				</div>
+				<label for="archivos" class="flex flex-col">
+					Archivos*
+					<FileDropzone
+						bind:files
+						multiple
+						notes="Los archivos no deben exceder los 5mb.</br>Tipos de archivos: PDF, DOCX, DOC, JPG, JPEG, PNG."
+					/>
+				</label>
+
 				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full"
 					>Subir parcial</button
 				>
