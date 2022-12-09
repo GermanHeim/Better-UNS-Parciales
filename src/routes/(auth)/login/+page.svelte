@@ -3,6 +3,30 @@
 	import { Alert } from '@skeletonlabs/skeleton';
 	import Icon from 'svelte-icons-pack/Icon.svelte';
 	import FiAlertCircle from 'svelte-icons-pack/fi/FiAlertCircle';
+	import { enhance } from '$app/forms';
+	import toast from 'svelte-french-toast';
+	let loading = false;
+
+	const submitLogin = () => {
+		loading = true;
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					break;
+				case 'invalid':
+					toast.error('Credenciales inválidas');
+					await update();
+					break;
+				case 'error':
+					toast.error(result.error.message);
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <div class="overflow-hidden h-full">
@@ -19,7 +43,12 @@
 			<p class="text-center m-4">
 				o <a href="/sign-up">registrarte</a> si no tienes una cuenta
 			</p>
-			<form action="?/login" method="POST" class="flex flex-col items-center space-y-6 w-full pt-4">
+			<form
+				action="?/login"
+				method="POST"
+				class="flex flex-col items-center space-y-6 w-full pt-4"
+				use:enhance={submitLogin}
+			>
 				<label for="email" class="flex flex-col">
 					Email
 					<input
@@ -42,7 +71,7 @@
 					/>
 				</label>
 
-				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full"
+				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full" disabled={loading}
 					>Iniciar sesión</button
 				>
 			</form>

@@ -47,7 +47,7 @@
 						</select>
 					</label>
 					<label for="numero" class="flex flex-col">
-						Número*
+						Número
 						<input
 							type="number"
 							name="numero"

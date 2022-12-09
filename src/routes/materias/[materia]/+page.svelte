@@ -1,37 +1,27 @@
 <script>
 	import { page } from '$app/stores';
-	import data from '$lib/data.json';
+	import data_materias from '$lib/data.json';
 	import { str2slug } from '$lib/utils.js';
 
-	// Get the name of the materia
-	let materia;
-	$: {
-		const slug = $page.url.pathname.split('/').pop();
-		materia = slug.split('-').join(' ');
-		materia = materia.replace(/\w\S*/g, function (txt) {
-			if (txt.length == 1 && txt != 'i') {
-				return txt;
-			} else if (
-				txt == 'ii' ||
-				txt == 'iii' ||
-				txt == 'iv' ||
-				txt == 'v' ||
-				txt == 'vi' ||
-				txt == 'vii' ||
-				txt == 'viii' ||
-				txt == 'ix' ||
-				txt == 'x'
-			) {
-				return txt.toUpperCase();
-			} else {
-				return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	let materia_actual = '';
+	data_materias.forEach((carrera) => {
+		carrera.materias.forEach((materia) => {
+			if (str2slug(materia) == $page.params.materia) {
+				materia_actual = materia;
 			}
 		});
-	}
+	});
+
+	export let data;
+	console.log(data);
+	console.log(data.parciales);
 </script>
 
 <svelte:head>
-	<title>{materia} - Better UNSParciales</title>
+	<title>{materia_actual} - Better UNS Parciales</title>
 </svelte:head>
 
-<h2 class="text-center pt-10 pb-5">{materia}</h2>
+<h3 class="text-center pt-10 pb-5">{materia_actual}</h3>
+<div>
+	<p>hola</p>
+</div>

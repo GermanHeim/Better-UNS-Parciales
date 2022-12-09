@@ -23,8 +23,7 @@
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 
 	// Local Features
-	import Navigation from '$lib/Navigation/Navigation.svelte';
-	import { storeDrawer } from '$lib/Navigation/stores';
+	import { storeDrawer } from '$lib/stores';
 
 	// Stylesheets
 	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
@@ -33,17 +32,38 @@
 	function drawerOpen() {
 		storeDrawer.set(true);
 	}
+	function drawerClose() {
+		storeDrawer.set(false);
+	}
 
 	const storeValue = writable(1);
 	export let data;
+	import { Toaster } from 'svelte-french-toast';
 
-	// TODO: Fix the logic of the if statement for the signup button (currently doesnt work lol)
+	//TODO: Change drawer width and backdrop size to occupy all the screen
 </script>
 
-<Drawer open={storeDrawer} position="left">
+<Toaster />
+<Drawer open={storeDrawer} position="left" class="backdrop-blur-sm">
 	<h2 class="p-4"><strong>Navegación</strong></h2>
 	<hr />
-	<Navigation />
+	<nav class="list-nav p-4">
+		<ul>
+			<li><a href="/" on:click={drawerClose}>Inicio</a></li>
+			{#if !data.user}
+				<li><a href="/login" on:click={drawerClose}>Iniciar Sesion</a></li>
+				<li><a href="/sign-up" on:click={drawerClose}>Registrarse</a></li>
+			{:else}
+				<li><a href="/log-out" on:click={drawerClose}>Cerrar sesión</a></li>
+			{/if}
+			<li><a href="/subir-un-parcial" on:click={drawerClose}>Subir un parcial</a></li>
+			<li>
+				<a href="https://github.com/GermanHeim/better-uns-parciales" on:click={drawerClose}
+					>GitHub</a
+				>
+			</li>
+		</ul>
+	</nav>
 </Drawer>
 
 <!-- App Shell -->

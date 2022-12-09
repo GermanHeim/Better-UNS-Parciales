@@ -1,21 +1,20 @@
 <script>
 	import data from '$lib/data.json';
-	import { goto } from '$app/navigation';
 	import { str2slug } from '$lib/utils.js';
 
-	//TODO: invert a tag in divs
+	//TODO: Fix no-underline not applying (materias y carreras)
 </script>
 
 <div class="px-8 py-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
 	{#each data as carrera}
 		<ul>
 			<li>
-				<div
-					class="flex h-24 bg-primary-600 cursor-pointer justify-center items-center text-center rounded-lg hover:bg-primary-500"
-					on:click={() => goto(`/carrera/${str2slug(carrera.carrera)}`)}
+				<a
+					class="transition-all no-underline flex h-24 bg-primary-600 justify-center items-center text-center rounded-lg hover:bg-primary-500"
+					href="/carrera/{str2slug(carrera.carrera)}"
 				>
-					<p>{carrera.carrera}</p>
-				</div>
+					<p class="no-underline">{carrera.carrera}</p>
+				</a>
 			</li>
 		</ul>
 	{/each}

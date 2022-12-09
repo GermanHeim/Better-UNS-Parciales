@@ -1,4 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
+import toast from 'svelte-french-toast';
 
 export const actions = {
 	login: async ({ locals, request }) => {
@@ -13,7 +14,7 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(500, 'Algo salió mal al iniciar sesión');
+			throw error(err.status, 'Algo salió mal al iniciar sesión');
 		}
 		throw redirect(303, '/');
 	}
