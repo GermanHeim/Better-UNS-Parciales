@@ -36,9 +36,19 @@
 		storeDrawer.set(false);
 	}
 
+	import { page } from '$app/stores';
+
 	const storeValue = writable(1);
 	export let data;
 	import { Toaster } from 'svelte-french-toast';
+	function setNavValue(c) {
+		storeValue.set(c);
+	}
+
+	$: setNavValue($page.url.pathname.split('/')[1]);
+	$: if ($page.url.pathname.split('/')[1] == '') {
+		setNavValue('home');
+	}
 
 	//TODO: Change drawer width and backdrop size to occupy all the screen
 </script>
@@ -92,37 +102,40 @@
 		<div class="w-0 md:h-full md:w-auto">
 			<AppRail selected={storeValue}>
 				<svelte:fragment slot="default">
-					<AppRailTile label="Inicio" title="Inicio" value={1} on:click={() => goto(`/`)}
+					<AppRailTile label="Inicio" title="Inicio" value={'home'} on:click={() => goto(`/`)}
 						><Icon src={FiHome} size="22" /></AppRailTile
 					>
 					{#if !data.user}
 						<AppRailTile
 							label="Iniciar sesion"
 							title="Iniciar sesion"
-							value={2}
+							value={'login'}
 							on:click={() => goto(`/login`)}><Icon src={FiLogIn} size="22" /></AppRailTile
 						>
 						<AppRailTile
 							label="Registrarse"
 							title="Tile"
-							value={3}
+							value={'sign-up'}
 							on:click={() => goto(`/sign-up`)}><Icon src={FiUserPlus} size="22" /></AppRailTile
 						>
 					{:else}
-						<AppRailTile label="Cerrar sesion" title="Cerrar sesion" value={6}
+						<AppRailTile
+							label="Cerrar sesion"
+							title="Cerrar sesion"
+							on:click={() => goto(`/logout`)}
 							><Icon src={FiLogOut} size="22" />
 						</AppRailTile>
 					{/if}
 					<AppRailTile
 						label="Materias"
 						title="Materias"
-						value={4}
+						value={'materias'}
 						on:click={() => goto(`/materias`)}><Icon src={FiArchive} size="22" /></AppRailTile
 					>
 					<AppRailTile
 						label="Subir un parcial"
 						title="Subir un parcial"
-						value={6}
+						value={'subir-un-parcial'}
 						on:click={() => goto(`/subir-un-parcial`)}
 						><Icon src={FiUploadCloud} size="22" />
 					</AppRailTile>
@@ -132,7 +145,6 @@
 					<AppRailTile
 						label="GitHub"
 						title="GitHub"
-						value={5}
 						on:click={() => goto(`https://github.com/GermanHeim/better-unsparciales`)}
 						><Icon src={FiGithub} size="22" /></AppRailTile
 					>

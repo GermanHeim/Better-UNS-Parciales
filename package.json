@@ -28,6 +28,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"file-saver": "^2.0.5",
+		"jszip": "^3.10.1",
 		"pocketbase": "^0.8.3",
 		"svelte-french-toast": "^1.0.3",
 		"svelte-icons-pack": "^2.0.0"

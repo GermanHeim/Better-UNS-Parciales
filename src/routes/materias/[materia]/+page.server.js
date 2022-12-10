@@ -1,7 +1,9 @@
 import { error } from '@sveltejs/kit';
 import { serializeNonPOJOs } from '$lib/utils';
+import { materia_actual } from "./+page.svelte"; // This goes to undefined, I need to use await?
 
-export const load = ({ locals, params }) => {
+
+export const load = ({ locals }) => {
 	const getParciales = async (materia_actual) => {
 		try {
 			const parciales = serializeNonPOJOs(
@@ -12,11 +14,12 @@ export const load = ({ locals, params }) => {
 			);
 			return parciales;
 		} catch (err) {
-			console.log(err);
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
 		}
 	};
 
 	return {
-		parciales: getParciales("Análisis Matemático I")
+		parciales: getParciales("Fisica I") // Hardcoded for now, should be materia_actual :(
 	};
 };

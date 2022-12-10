@@ -15,7 +15,7 @@
 	<title>{carrera_actual} - Better UNS Parciales</title>
 </svelte:head>
 
-<h2 class="text-center pt-10 pb-5">{carrera_actual}</h2>
+<h2 class="text-center pt-10 pb-5"><strong>{carrera_actual}</strong></h2>
 
 <div class="px-8 py-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
 	{#each data.find((carrera) => str2slug(carrera.carrera) === $page.params.carrera).materias as materia}

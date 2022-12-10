@@ -10,3 +10,5 @@ export const str2slug = (str) => {
     .trim()
     .replace(/[-\s]+/g, '-');
 };
+
+export const pocketbase_url = 'http://127.0.0.1:8090';
