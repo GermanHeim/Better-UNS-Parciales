@@ -1,9 +1,9 @@
 import { error, redirect } from '@sveltejs/kit';
-import toast from 'svelte-french-toast';
 
 export const actions = {
-	login: async ({ locals, request }) => {
+	login: async ({ request, locals }) => {
 		const body = Object.fromEntries(await request.formData());
+
 		try {
 			await locals.pb.collection('users').authWithPassword(body.email, body.password);
 			if (!locals.pb?.authStore?.model?.verified) {
@@ -14,8 +14,9 @@ export const actions = {
 			}
 		} catch (err) {
 			console.log('Error: ', err);
-			throw error(err.status, 'Algo salió mal al iniciar sesión');
+			throw error(500, 'Something went wrong logging in');
 		}
+
 		throw redirect(303, '/');
 	}
 };

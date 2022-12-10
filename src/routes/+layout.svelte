@@ -78,7 +78,7 @@
 							<Icon src={FiMenu} />
 						</span>
 					</button>
-					<h1 class="text-xl"><strong>Better UNSParciales</strong></h1>
+					<h1 class="text-xl"><strong>Better UNS Parciales</strong></h1>
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">

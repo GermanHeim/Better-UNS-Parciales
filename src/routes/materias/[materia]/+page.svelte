@@ -3,11 +3,11 @@
 	import data_materias from '$lib/data.json';
 	import { str2slug } from '$lib/utils.js';
 
-	let materia_actual = '';
+	let materia_actual;
 	data_materias.forEach((carrera) => {
 		carrera.materias.forEach((materia) => {
 			if (str2slug(materia) == $page.params.materia) {
-				materia_actual = materia;
+				return (materia_actual = materia);
 			}
 		});
 	});
