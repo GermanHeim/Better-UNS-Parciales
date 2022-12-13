@@ -30,14 +30,13 @@
 		return [day, month, year].join('/');
 	}
 
-	export { materia_actual };
 	export let data;
 
 	const saveZip = (urls) => {
 		if (!urls) return;
 
 		const zip = new JSZip();
-		const folder = zip.folder('files'); // folder name where all files will be placed in
+		const folder = zip.folder('parcial');
 
 		urls.forEach((url) => {
 			const blobPromise = fetch(url).then((r) => {
@@ -104,19 +103,19 @@
 
 				{#if parcial.archivos.length > 1}
 					<button
-						class="btn bg-primary-500 btn-xl text-white w-full mt-5"
+						class="btn bg-primary-500 btn-xl text-white w-full mt-5 flex flex-row gap-3"
 						on:click={() => {
 							saveZip(parcial.archivos);
 						}}
 					>
-						<Icon src={FiDownload} /> &nbsp Descargar ZIP
+						<Icon src={FiDownload} /> Descargar ZIP
 					</button>
 				{:else}
 					<button
-						class="btn bg-primary-500 btn-xl text-white w-full mt-5"
+						class="btn bg-primary-500 btn-xl text-white w-full mt-5 flex flex-row gap-3"
 						href="{pocketbase_url}/api/files/parciales/{parcial.id}/{parcial.archivos}"
 					>
-						<Icon src={FiDownload} /> &nbsp Descargar
+						<Icon src={FiDownload} /> Descargar
 					</button>
 				{/if}
 			</div>
@@ -129,7 +128,7 @@
 		</h3>
 		<p class="text-center">
 			¿Queres ayudarnos a completar la base de datos? <br />
-			Podes subir archivos <a href="/subir-un-parcial">aca</a>
+			Podes subir archivos <a href="/subir-un-parcial">aca</a>.
 		</p>
 	</div>
 {/if}

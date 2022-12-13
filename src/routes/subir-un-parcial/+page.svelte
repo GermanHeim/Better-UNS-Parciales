@@ -2,6 +2,7 @@
 	import data from '$lib/data.json';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
 	let files;
+	import { str2slug } from '$lib/utils';
 
 	let materiasUnique = [];
 	data.forEach((carrera) => {
@@ -26,13 +27,13 @@
 				</p>
 			</div>
 
-			<form action="?/subir-un-parcial" method="POST" class="items-center space-y-6 w-full pt-4">
+			<form action="?/subir" method="POST" class="items-center space-y-6 w-full pt-4">
 				<div class="justify-items-center grid grid-cols-1 md:grid-cols-2 gap-4 ">
 					<label for="materia" class="flex flex-col">
 						Materia*
 						<select class="form-input px-4 py-2 rounded-lg w-72" name="materia">
 							{#each materiasUnique as materia}
-								<option value={materia}>{materia}</option>
+								<option value={str2slug(materia)}>{materia}</option>
 							{/each}
 						</select>
 					</label>
@@ -84,10 +85,22 @@
 				<label for="archivos" class="flex flex-col">
 					Archivos*
 					<FileDropzone
+						id="files"
 						bind:files
 						multiple
 						notes="Los archivos no deben exceder los 5mb.</br>Tipos de archivos: PDF, DOCX, DOC, JPG, JPEG, PNG."
 					/>
+
+					{#if files}
+						{#each files as file}
+							<div class="flex flex-row items-center justify-between">
+								<div class="flex flex-row items-center">
+									<p class="ml-2">{file.name}</p>
+								</div>
+								<p>{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+							</div>
+						{/each}
+					{/if}
 				</label>
 
 				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full"
