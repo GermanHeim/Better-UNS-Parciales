@@ -49,6 +49,8 @@
 
 		zip.generateAsync({ type: 'blob' }).then((blob) => saveAs(blob, 'parcial.zip'));
 	};
+
+	//TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)
 </script>
 
 <svelte:head>
@@ -60,7 +62,7 @@
 {#if data.parciales.length != 0}
 	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 		{#each data.parciales as parcial}
-			<div class="card card-body">
+			<div class="card card-body p-4">
 				{#if parcial.numero != 0}
 					{#if parcial.tipo != 0}
 						<h3 class="capitalize text-center pb-4">
@@ -111,12 +113,15 @@
 						<Icon src={FiDownload} /> Descargar ZIP
 					</button>
 				{:else}
-					<button
+					<a
 						class="btn bg-primary-500 btn-xl text-white w-full mt-5 flex flex-row gap-3"
 						href="{pocketbase_url}/api/files/parciales/{parcial.id}/{parcial.archivos}"
+						target="_blank"
+						rel="noreferrer"
+						download
 					>
-						<Icon src={FiDownload} /> Descargar
-					</button>
+						Descargar <Icon src={FiDownload} />
+					</a>
 				{/if}
 			</div>
 		{/each}
@@ -124,11 +129,11 @@
 {:else}
 	<div class="px-8 py-5">
 		<h3 class="text-center pb-4">
-			Lo sentimos, todavia no contamos con archivos de esta materia 😞
+			Lo sentimos, todavia no contamos con archivos de esta materia 😢
 		</h3>
 		<p class="text-center">
 			¿Queres ayudarnos a completar la base de datos? <br />
-			Podes subir archivos <a href="/subir-un-parcial">aca</a>.
+			Podes subir archivos <a href="/subir-un-parcial">aca</a> o haciendo click en el + de abajo.
 		</p>
 	</div>
 {/if}
@@ -137,5 +142,6 @@
 	class="fixed bottom-0 right-0 m-5 bg-primary-600 rounded-full w-12 h-12 flex items-center justify-center text-white transition-all hover:bg-primary-500"
 	on:click={() => (window.location.href = '/subir-un-parcial')}
 >
+	<!-- TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)-->
 	+
 </button>

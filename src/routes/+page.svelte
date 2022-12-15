@@ -1,8 +1,6 @@
 <script>
 	import data from '$lib/data.json';
 	import { str2slug } from '$lib/utils.js';
-
-	//TODO: Fix no-underline not applying (materias y carreras)
 </script>
 
 <h2 class="text-center pt-10 pb-5 hidden md:block">
@@ -14,10 +12,10 @@
 		<ul>
 			<li>
 				<a
-					class="transition-all no-underline flex h-24 bg-primary-600 justify-center items-center text-center rounded-lg hover:bg-primary-500"
+					class="!no-underline text-white transition-all flex h-24 bg-primary-600 justify-center items-center text-center rounded-lg hover:bg-primary-500"
 					href="/carrera/{str2slug(carrera.carrera)}"
 				>
-					<p class="no-underline">{carrera.carrera}</p>
+					<p class="!text-white">{carrera.carrera}</p>
 				</a>
 			</li>
 		</ul>

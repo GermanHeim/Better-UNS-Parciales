@@ -1,8 +1,13 @@
 <script>
-	import data from '$lib/data.json';
+	import { enhance } from '$app/forms';
 	import { FileDropzone } from '@skeletonlabs/skeleton';
-	let files;
 	import { str2slug } from '$lib/utils';
+	import data from '$lib/data.json';
+	import toast from 'svelte-french-toast'; // I need to check if I need this import, prob not. I don't remember layout
+	import Icon from 'svelte-icons-pack/Icon.svelte';
+	import FiUploadCloud from 'svelte-icons-pack/fi/FiUploadCloud';
+	let archivos;
+	let loading = false;
 
 	let materiasUnique = [];
 	data.forEach((carrera) => {
@@ -13,12 +18,29 @@
 	materiasUnique = [...new Set(materiasUnique)];
 	materiasUnique.sort();
 
-	// TODO: Add logics, better style, change file drop lang
+	const submitParcial = () => {
+		loading = true;
+		return async ({ result, update }) => {
+			switch (result.type) {
+				case 'success':
+					await update();
+					break;
+				case 'error':
+					toast.error('Ocurrio un error al subir el parcial');
+					break;
+				default:
+					await update();
+			}
+			loading = false;
+		};
+	};
+
+	// TODO: Add logics that actually work
 </script>
 
 <div class="overflow-hidden h-full">
 	<div class="flex flex-col h-full  items-center w-full justify-center">
-		<div class="card card-body">
+		<div class="w-full card card-body rounded-none p-4 md:w-auto md:rounded-md lg:rounded-xl">
 			<div>
 				<h1 class="text-center m-4"><strong>Subir un parcial</strong></h1>
 				<p class="text-center m-4">
@@ -27,7 +49,13 @@
 				</p>
 			</div>
 
-			<form action="?/subir" method="POST" class="items-center space-y-6 w-full pt-4">
+			<form
+				action="?/subir"
+				method="POST"
+				enctype="multipart/form-data"
+				class="items-center space-y-6 w-full pt-4"
+				use:enhance={submitParcial}
+			>
 				<div class="justify-items-center grid grid-cols-1 md:grid-cols-2 gap-4 ">
 					<label for="materia" class="flex flex-col">
 						Materia*
@@ -38,7 +66,7 @@
 						</select>
 					</label>
 					<label for="tipo" class="flex flex-col">
-						Tipo de evaluación*
+						Tipo de evaluación
 						<select class="form-input px-4 py-2 rounded-lg w-72" name="tipo">
 							<option value="parcial">Parcial</option>
 							<option value="final regular">Final regular</option>
@@ -85,26 +113,40 @@
 				<label for="archivos" class="flex flex-col">
 					Archivos*
 					<FileDropzone
-						id="files"
-						bind:files
+						id="archivos"
+						name="archivos"
+						bind:archivos
 						multiple
-						notes="Los archivos no deben exceder los 5mb.</br>Tipos de archivos: PDF, DOCX, DOC, JPG, JPEG, PNG."
+						height="h-44 md:h-28"
+						title="Suelte archivos o haga clic para seleccionar"
+						notes="Los archivos no deben exceder los 5 mb. Maximo 5 archivos. Tipos de archivos: PDF,
+									DOCX, DOC, JPG, JPEG, PNG."
 					/>
 
-					{#if files}
-						{#each files as file}
+					{#if archivos}
+						{#each archivos as archivo}
 							<div class="flex flex-row items-center justify-between">
 								<div class="flex flex-row items-center">
-									<p class="ml-2">{file.name}</p>
+									{#if archivo.size > 5242880}
+										<p class="!text-warning-400 mr-2">{archivo.name}</p>
+									{:else}
+										<p class="mr-2">{archivo.name}</p>
+									{/if}
 								</div>
-								<p>{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+								{#if archivo.size > 5242880}
+									<p class="!text-warning-400">{(archivo.size / 1024 / 1024).toFixed(2)} mb</p>
+								{:else}
+									<p>{(archivo.size / 1024 / 1024).toFixed(2)} mb</p>
+								{/if}
 							</div>
 						{/each}
 					{/if}
 				</label>
 
-				<button type="submit" class="btn bg-primary-500 btn-xl text-white w-full"
-					>Subir parcial</button
+				<button
+					type="submit"
+					class="btn bg-primary-500 btn-xl text-white w-full mt-5 flex flex-row gap-3"
+					disabled={loading}>Subir parcial <Icon src={FiUploadCloud} size="24" /></button
 				>
 			</form>
 		</div>

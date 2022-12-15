@@ -21,19 +21,17 @@
 	import { AppShell, AppBar, AppRail, AppRailTile } from '@skeletonlabs/skeleton';
 	import { Drawer } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-
-	// Local Features
-	import { storeDrawer } from '$lib/stores';
+	import { drawerStore } from '@skeletonlabs/skeleton';
 
 	// Stylesheets
 	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
 	import '@skeletonlabs/skeleton/styles/all.css';
 	import '../app.postcss';
 	function drawerOpen() {
-		storeDrawer.set(true);
+		drawerStore.open({});
 	}
 	function drawerClose() {
-		storeDrawer.set(false);
+		drawerStore.close();
 	}
 
 	import { page } from '$app/stores';
@@ -49,12 +47,15 @@
 	$: if ($page.url.pathname.split('/')[1] == '') {
 		setNavValue('home');
 	}
+	$: if ($page.url.pathname.split('/')[1] == 'carrera') {
+		setNavValue('home');
+	}
 
 	//TODO: Change drawer width and backdrop size to occupy all the screen
 </script>
 
 <Toaster />
-<Drawer open={storeDrawer} position="left" class="backdrop-blur-sm">
+<Drawer class="backdrop-blur-sm" width="w-96">
 	<h2 class="p-4"><strong>Navegación</strong></h2>
 	<hr />
 	<nav class="list-nav p-4">

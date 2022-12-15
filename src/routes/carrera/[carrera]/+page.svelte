@@ -22,10 +22,10 @@
 		<ul>
 			<li>
 				<a
-					class="transition-all flex h-24 bg-primary-600 cursor-pointer justify-center items-center text-center rounded-lg hover:bg-primary-500"
+					class="transition-all !no-underline flex h-24 bg-primary-600 cursor-pointer justify-center items-center text-center rounded-lg hover:bg-primary-500"
 					href="/materias/{str2slug(materia)}"
 				>
-					<p>{materia}</p>
+					<p class="!text-white">{materia}</p>
 				</a>
 			</li>
 		</ul>

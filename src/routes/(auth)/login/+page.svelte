@@ -38,7 +38,7 @@
 		</Alert>
 	{/if}
 	<div class="flex flex-col h-full  items-center w-full justify-center">
-		<div class="card card-body">
+		<div class="card card-body p-4">
 			<h1 class="text-center m-4"><strong>Iniciar sesión</strong></h1>
 			<p class="text-center m-4">
 				o <a href="/sign-up">registrarte</a> si no tienes una cuenta

@@ -2,7 +2,7 @@
 <!-- TODO: Progresive forms -->
 
 <div class="flex flex-col h-full items-center w-full justify-center">
-	<div class="card card-body">
+	<div class="card card-body p-4">
 		<h1 class="text-center m-4"><strong>Registrarte</strong></h1>
 		<p class="text-center m-4">
 			o <a href="/login">inicia sesión</a> si ya tienes una cuenta
