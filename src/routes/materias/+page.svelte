@@ -1,6 +1,7 @@
 <script>
 	import data_materias from '$lib/data.json';
 	import { str2slug } from '$lib/utils.js';
+	import { Paginator } from '@skeletonlabs/skeleton';
 
 	let materiasUnique = [];
 	data_materias.forEach((carrera) => {
@@ -11,23 +12,45 @@
 	materiasUnique = [...new Set(materiasUnique)];
 	materiasUnique.sort();
 
+	$: page = {
+		offset: 0,
+		limit: 50,
+		size: materiasUnique.length,
+		amounts: [25, 50, 100, materiasUnique.length]
+	};
+
+	$: materiasSliced = materiasUnique.slice(
+		page.offset * page.limit, // start
+		page.offset * page.limit + page.limit // end
+	);
+
+	// Event Handlers
+	function onPageChange(e) {
+		console.log('Paginator - event:page', e.detail);
+	}
+	function onAmountChange(e) {
+		console.log('Paginator - event:amount', e.detail);
+	}
+
 	// TODO: Pagination
 	// See: https://www.skeleton.dev/components/paginators
 </script>
 
 <h2 class="text-center pt-10 pb-5">Materias</h2>
 
-<div class="px-8 py-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-	{#each materiasUnique as materia}
-		<ul>
-			<li>
-				<a
-					class="transition-all !no-underline flex h-24 bg-primary-600 justify-center items-center text-center rounded-lg hover:bg-primary-500"
-					href="/materias/{str2slug(materia)}"
-				>
-					<p class="!text-white">{materia}</p>
-				</a>
-			</li>
-		</ul>
+<ul class="px-8 py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+	{#each materiasSliced as materia}
+		<li>
+			<a
+				class="transition-all !no-underline flex h-24 bg-primary-600 justify-center items-center text-center rounded-lg hover:bg-primary-500"
+				href="/materias/{str2slug(materia)}"
+			>
+				<p class="!text-white">{materia}</p>
+			</a>
+		</li>
 	{/each}
+</ul>
+
+<div class="col-span-2 card p-4 space-y-4 rounded-none">
+	<Paginator bind:settings={page} on:page={onPageChange} on:amount={onAmountChange} />
 </div>
