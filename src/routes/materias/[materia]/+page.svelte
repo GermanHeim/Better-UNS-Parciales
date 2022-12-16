@@ -51,6 +51,7 @@
 	};
 
 	//TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)
+	// Create a loading screen, maybe {#await data}?
 </script>
 
 <svelte:head>
@@ -58,7 +59,6 @@
 </svelte:head>
 
 <h3 class="text-center pt-10 pb-5"><strong>{materia_actual}</strong></h3>
-
 {#if data.parciales.length != 0}
 	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 		{#each data.parciales as parcial}

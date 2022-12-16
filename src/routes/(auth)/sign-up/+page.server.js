@@ -10,7 +10,6 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(500, 'Algo salió mal al registrarse');
 		}
-
 		throw redirect(303, '/login');
 	}
 };

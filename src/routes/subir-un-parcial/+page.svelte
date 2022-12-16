@@ -6,7 +6,7 @@
 	import toast from 'svelte-french-toast'; // I need to check if I need this import, prob not. I don't remember layout
 	import Icon from 'svelte-icons-pack/Icon.svelte';
 	import FiUploadCloud from 'svelte-icons-pack/fi/FiUploadCloud';
-	let archivos;
+	let files;
 	let loading = false;
 
 	let materiasUnique = [];
@@ -23,6 +23,7 @@
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'success':
+					toast.success('Parcial subido con exito'); // This doesn't work?
 					await update();
 					break;
 				case 'error':
@@ -35,7 +36,19 @@
 		};
 	};
 
-	// TODO: Add logics that actually work
+	$: if (files) {
+		for (let i = 0; i < files.length; i++) {
+			if (files[i].size > 5000000) {
+				loading = true;
+			} else {
+				loading = false;
+			}
+		}
+	} else if (files && files.length > 5) {
+		loading = true;
+	} else {
+		loading = false;
+	}
 </script>
 
 <div class="overflow-hidden h-full">
@@ -115,33 +128,36 @@
 					<FileDropzone
 						id="archivos"
 						name="archivos"
-						bind:archivos
+						bind:files
 						multiple
+						accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, image/jpg, image/jpeg, image/png"
 						height="h-44 md:h-28"
 						title="Suelte archivos o haga clic para seleccionar"
 						notes="Los archivos no deben exceder los 5 mb. Maximo 5 archivos. Tipos de archivos: PDF,
 									DOCX, DOC, JPG, JPEG, PNG."
 					/>
-
-					{#if archivos}
-						{#each archivos as archivo}
-							<div class="flex flex-row items-center justify-between">
-								<div class="flex flex-row items-center">
-									{#if archivo.size > 5242880}
-										<p class="!text-warning-400 mr-2">{archivo.name}</p>
-									{:else}
-										<p class="mr-2">{archivo.name}</p>
-									{/if}
-								</div>
-								{#if archivo.size > 5242880}
-									<p class="!text-warning-400">{(archivo.size / 1024 / 1024).toFixed(2)} mb</p>
-								{:else}
-									<p>{(archivo.size / 1024 / 1024).toFixed(2)} mb</p>
-								{/if}
-							</div>
-						{/each}
-					{/if}
 				</label>
+
+				{#if files && files.length <= 5}
+					{#each files as file}
+						{#if file.size > 5242880}
+							<div class="flex flex-row items-center justify-between">
+								<p class="ml-2 !text-red-500">{file.name}</p>
+								<p class="ml-2 !text-red-500">{(file.size / 1048576).toFixed(2)} MB</p>
+							</div>
+						{:else}
+							<div class="flex flex-row items-center justify-between">
+								<p class="ml-2">{file.name}</p>
+								<p class="ml-2">{(file.size / 1048576).toFixed(2)} MB</p>
+							</div>
+						{/if}
+					{/each}
+				{/if}
+				{#if files && files.length > 5}
+					<div class="flex flex-row items-center justify-center">
+						<p class="ml-2 !text-red-500">Solo se pueden subir 5 archivos</p>
+					</div>
+				{/if}
 
 				<button
 					type="submit"

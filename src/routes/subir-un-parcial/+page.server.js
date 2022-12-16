@@ -6,12 +6,9 @@ export const actions = {
 		try {
 			await locals.pb.collection('parciales').create(body); // This doesn't work, files get upload like objects for some reason
 		} catch (err) {
-			console.log(body);
-
 			console.log('Error: ', err);
 			throw error(err.status, err.message);
 		}
-
-		throw redirect(303, '/');
+		throw redirect(303, '/materias/' + body.get('materia'));
 	}
 };
