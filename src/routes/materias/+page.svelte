@@ -12,7 +12,7 @@
 	materiasUnique = [...new Set(materiasUnique)];
 	materiasUnique.sort();
 
-	$: page = {
+	let page = {
 		offset: 0,
 		limit: 50,
 		size: materiasUnique.length,
@@ -20,20 +20,9 @@
 	};
 
 	$: materiasSliced = materiasUnique.slice(
-		page.offset * page.limit, // start
-		page.offset * page.limit + page.limit // end
+		page.offset * page.limit,
+		page.offset * page.limit + page.limit
 	);
-
-	// Event Handlers
-	function onPageChange(e) {
-		console.log('Paginator - event:page', e.detail);
-	}
-	function onAmountChange(e) {
-		console.log('Paginator - event:amount', e.detail);
-	}
-
-	// TODO: Pagination
-	// See: https://www.skeleton.dev/components/paginators
 </script>
 
 <h2 class="text-center pt-10 pb-5">Materias</h2>
@@ -52,5 +41,5 @@
 </ul>
 
 <div class="col-span-2 card p-4 space-y-4 rounded-none">
-	<Paginator bind:settings={page} on:page={onPageChange} on:amount={onAmountChange} />
+	<Paginator bind:settings={page} />
 </div>

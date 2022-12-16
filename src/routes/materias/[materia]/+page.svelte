@@ -50,12 +50,24 @@
 		zip.generateAsync({ type: 'blob' }).then((blob) => saveAs(blob, 'parcial.zip'));
 	};
 
-	//TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)
-	// Create a loading screen, maybe {#await data}?
+	import { modalStore } from '@skeletonlabs/skeleton';
+	import subirParcialModal from '$lib/subirParcialModal.svelte';
+
+	function modalComponentForm() {
+		const c = { ref: subirParcialModal };
+		const d = {
+			type: 'component',
+			title: 'Subir un archivo a ' + materia_actual,
+			body: 'Complete el formulario para subir archivos a la materia.',
+			component: c
+		};
+		modalStore.trigger(d);
+	}
 </script>
 
 <svelte:head>
 	<title>{materia_actual} - Better UNS Parciales</title>
+	<meta property="og:title" content="{materia_actual} - Better UNS Parciales" />
 </svelte:head>
 
 <h3 class="text-center pt-10 pb-5"><strong>{materia_actual}</strong></h3>
@@ -133,14 +145,18 @@
 		</h3>
 		<p class="text-center">
 			¿Queres ayudarnos a completar la base de datos? <br />
-			Podes subir archivos <a href="/subir-un-parcial">aca</a> o haciendo click en el + de abajo.
+			Podes subir archivos
+			<button
+				class="text-primary-500 underline decoration-dotted"
+				on:click={() => modalComponentForm()}>aca</button
+			> o haciendo click en el + de abajo.
 		</p>
 	</div>
 {/if}
 
 <button
 	class="fixed bottom-0 right-0 m-5 bg-primary-600 rounded-full w-12 h-12 flex items-center justify-center text-white transition-all hover:bg-primary-500"
-	on:click={() => (window.location.href = '/subir-un-parcial')}
+	on:click={() => modalComponentForm()}
 >
 	<!-- TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)-->
 	+

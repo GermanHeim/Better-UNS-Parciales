@@ -21,3 +21,16 @@ export const load = ({ locals, params }) => {
 		parciales: getParciales(params.materia)
 	};
 };
+
+export const actions = {
+	subir: async ({ request, params, locals }) => {
+        const body = await request.formData();
+		body.append('materia', params.materia);
+		try {
+			await locals.pb.collection('parciales').create(body);
+		} catch (err) {
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
+		}
+	}
+};

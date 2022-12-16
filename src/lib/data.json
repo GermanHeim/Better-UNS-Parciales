@@ -128,6 +128,10 @@
       "materias":["Álgebra Lineal", "Análisis I", "Análisis II", "Análisis Numérico", "Análisis Superior", "Diagnóstico y Nivelación Matemática", "Ecuaciones Diferenciales", "Elementos de Algebra", "Estructuras Algebraicas I", "Funciones Reales", "Fundamentos de la Matemática", "Geometría Analítica", "Geometría I", "Geometría II", "Modelos Matemáticos de la Física", "Probabilidad y Estadística", "Topología", "Variable Compleja"]
    },
    {
+      "carrera":"Lic. en Obstetricia",
+      "materias":["Cuidado del Binomio Madre e Hijo", "Embarazo de Riesgo", "Parto y Puerperio", "Patologías del Embarazo", "Servicios de Salud", "Cuidados del Recién Nacido", "Cuidados en el Posparto", "Examen de Suficiencia en Herramientas Informáticas LO", "Examen de Suficiencia en Idioma Inglés LO", "Salud Sexual y Procreación Responsable"]
+   },
+   {
       "carrera":"Lic en Oceanografía",
       "materias":["Botánica Marina", "Cartografía Náutica", "Contaminación Marina", "Diagnóstico y Nivelación Matemática", "Ecología Marina", "Geofísica", "Geología Costera y Litoral", "Geología Marina", "Gestión Ambiental", "Instrumentación y Análisis de Datos Oceanográficos", "Introducción a la Oceanografía", "Invertebrados Marinos", "Mareas", "Nociones de Geometría Analítica", "Olas", "Prácticas de Química Inorgánica", "Química Orgánica Avanzada", "Recursos Pesqueros", "Sedimentología para Oceanografía", "Vertebrados Marinos"]
    },

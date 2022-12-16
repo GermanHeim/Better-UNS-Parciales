@@ -4,7 +4,7 @@ export const actions = {
 	subir: async ({ request, locals }) => {
         const body = await request.formData();
 		try {
-			await locals.pb.collection('parciales').create(body); // This doesn't work, files get upload like objects for some reason
+			await locals.pb.collection('parciales').create(body);
 		} catch (err) {
 			console.log('Error: ', err);
 			throw error(err.status, err.message);

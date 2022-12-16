@@ -16,6 +16,7 @@
 	import FiLogOut from 'svelte-icons-pack/fi/FiLogOut';
 	import FiArchive from 'svelte-icons-pack/fi/FiArchive';
 	import FiUploadCloud from 'svelte-icons-pack/fi/FiUploadCloud';
+	import FiSearch from 'svelte-icons-pack/fi/FiSearch';
 
 	// Skeleton Features
 	import { AppShell, AppBar, AppRail, AppRailTile } from '@skeletonlabs/skeleton';
@@ -51,10 +52,23 @@
 		setNavValue('home');
 	}
 
-	//TODO: Change drawer width and backdrop size to occupy all the screen
+	import { Modal, modalStore } from '@skeletonlabs/skeleton';
+	import buscarModal from '$lib/buscarModal.svelte';
+
+	function triggerSearch() {
+		const c = { ref: buscarModal };
+		const d = {
+			type: 'component',
+			component: c
+		};
+		modalStore.trigger(d);
+	}
+
+	// TODO: Add logic to search button in both mobile and desktop
 </script>
 
 <Toaster />
+<Modal />
 <Drawer class="backdrop-blur-sm" width="w-96">
 	<h2 class="p-4"><strong>Navegación</strong></h2>
 	<hr />
@@ -67,6 +81,8 @@
 			{:else}
 				<li><a href="/log-out" on:click={drawerClose}>Cerrar sesión</a></li>
 			{/if}
+			<li><a on:click={drawerClose} on:click={() => triggerSearch()}>Buscar</a></li>
+			<li><a href="/materia" on:click={drawerClose}>Materias</a></li>
 			<li><a href="/subir-un-parcial" on:click={drawerClose}>Subir un parcial</a></li>
 			<li>
 				<a href="https://github.com/GermanHeim/better-uns-parciales" on:click={drawerClose}
@@ -127,6 +143,12 @@
 							><Icon src={FiLogOut} size="22" />
 						</AppRailTile>
 					{/if}
+					<AppRailTile
+						label="Buscar"
+						title="Buscar"
+						value={'buscar'}
+						on:click={() => triggerSearch()}><Icon src={FiSearch} size="22" /></AppRailTile
+					>
 					<AppRailTile
 						label="Materias"
 						title="Materias"

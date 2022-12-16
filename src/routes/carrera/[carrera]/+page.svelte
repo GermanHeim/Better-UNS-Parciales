@@ -13,6 +13,7 @@
 
 <svelte:head>
 	<title>{carrera_actual} - Better UNS Parciales</title>
+	<meta property="og:title" content="{carrera_actual} - Better UNS Parciales" />
 </svelte:head>
 
 <h2 class="text-center pt-10 pb-5"><strong>{carrera_actual}</strong></h2>

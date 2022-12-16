@@ -52,7 +52,7 @@
 </script>
 
 <div class="overflow-hidden h-full">
-	<div class="flex flex-col h-full  items-center w-full justify-center">
+	<div class="flex flex-col h-full items-center w-full justify-center">
 		<div class="w-full card card-body rounded-none p-4 md:w-auto md:rounded-md lg:rounded-xl">
 			<div>
 				<h1 class="text-center m-4"><strong>Subir un parcial</strong></h1>
@@ -93,7 +93,7 @@
 						<input
 							type="number"
 							name="numero"
-							placeholder="Numero de parcial"
+							placeholder="Número de parcial"
 							class="form-input px-4 py-2 rounded-lg w-72"
 						/>
 					</label>
@@ -155,7 +155,7 @@
 				{/if}
 				{#if files && files.length > 5}
 					<div class="flex flex-row items-center justify-center">
-						<p class="ml-2 !text-red-500">Solo se pueden subir 5 archivos</p>
+						<p class="ml-2 !text-red-500">Solo se puede subir hasta 5 archivos</p>
 					</div>
 				{/if}
 
