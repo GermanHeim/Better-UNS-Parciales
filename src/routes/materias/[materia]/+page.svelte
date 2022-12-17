@@ -158,6 +158,5 @@
 	class="fixed bottom-0 right-0 m-5 bg-primary-600 rounded-full w-12 h-12 flex items-center justify-center text-white transition-all hover:bg-primary-500"
 	on:click={() => modalComponentForm()}
 >
-	<!-- TODO: Add modal logic to upload a file without needing to add the materia itself (gotten from url)-->
 	+
 </button>

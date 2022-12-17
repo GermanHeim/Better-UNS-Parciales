@@ -63,8 +63,6 @@
 		};
 		modalStore.trigger(d);
 	}
-
-	// TODO: Add logic to search button in both mobile and desktop
 </script>
 
 <Toaster />
