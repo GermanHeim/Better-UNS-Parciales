@@ -94,14 +94,14 @@
 					{#if categoria == 'Carreras'}
 						{#each carreras as carrera}
 							<a
-								class="btn btn-ghost-surface btn-base"
+								class="btn btn-ghost-surface btn-base transition-all dark:hover:bg-zinc-600"
 								href="/carrera/{str2slug(carrera)}"
 								on:click={() => {
 									modalStore.close();
 								}}
 							>
-								{#if carrera.length > 30}
-									{carrera.substring(0, 30)}...
+								{#if carrera.length > 32}
+									{carrera.substring(0, 32)}...
 								{:else}
 									{carrera}
 								{/if}
@@ -110,14 +110,14 @@
 					{:else if categoria == 'Materias'}
 						{#each materiasUnique as materia}
 							<a
-								class="btn btn-ghost-surface btn-base"
+								class="btn btn-ghost-surface btn-base transition-all dark:hover:bg-zinc-600"
 								href="/materias/{str2slug(materia)}"
 								on:click={() => {
 									modalStore.close();
 								}}
 							>
-								{#if materia.length > 30}
-									{materia.substring(0, 30)}...
+								{#if materia.length > 32}
+									{materia.substring(0, 32)}...
 								{:else}
 									{materia}
 								{/if}

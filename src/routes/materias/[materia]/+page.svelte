@@ -36,7 +36,7 @@
 		if (!urls) return;
 
 		const zip = new JSZip();
-		const folder = zip.folder('parcial');
+		const folder = zip.folder(`parcial-${str2slug(materia_actual)}`);
 
 		urls.forEach((url) => {
 			const blobPromise = fetch(url).then((r) => {
@@ -47,7 +47,9 @@
 			folder.file(name, blobPromise);
 		});
 
-		zip.generateAsync({ type: 'blob' }).then((blob) => saveAs(blob, 'parcial.zip'));
+		zip
+			.generateAsync({ type: 'blob' })
+			.then((content) => saveAs(content, `parcial-${str2slug(materia_actual)}.zip`));
 	};
 
 	import { modalStore } from '@skeletonlabs/skeleton';
@@ -58,7 +60,6 @@
 		const d = {
 			type: 'component',
 			title: 'Subir un archivo a ' + materia_actual,
-			body: 'Complete el formulario para subir archivos a la materia.',
 			component: c
 		};
 		modalStore.trigger(d);
@@ -70,7 +71,7 @@
 	<meta property="og:title" content="{materia_actual} - Better UNS Parciales" />
 </svelte:head>
 
-<h3 class="text-center pt-10 pb-5"><strong>{materia_actual}</strong></h3>
+<h3 class="text-center pt-7 pb-3"><strong>{materia_actual}</strong></h3>
 {#if data.parciales.length != 0}
 	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 		{#each data.parciales as parcial}
@@ -148,7 +149,7 @@
 			Podes subir archivos
 			<button
 				class="text-primary-500 underline decoration-dotted"
-				on:click={() => modalComponentForm()}>aca</button
+				on:click={() => modalComponentForm()}>acá</button
 			> o haciendo click en el + de abajo.
 		</p>
 	</div>

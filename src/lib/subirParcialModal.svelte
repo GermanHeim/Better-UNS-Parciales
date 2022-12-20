@@ -79,10 +79,11 @@
 					notes="Los archivos no deben exceder los 5 mb."
 				/>
 			</label>
-			<div class="flex flex-row">
+			<div class="flex flex-row gap-4 justify-end">
 				<button
-					class="btn bg-slate-600 mt-5 flex flex-row gap-3 w-24 md:w-auto"
-					on:click={parent.onClose}>Cancelar</button
+					class="btn bg-zinc-300 dark:bg-zinc-600 mt-5 flex flex-row w-24 md:w-auto"
+					on:click={parent.onClose}
+					type="button">Cancelar</button
 				>
 				<button
 					class="btn bg-primary-500 text-white mt-5 flex flex-row gap-3 w-26 md:w-auto"

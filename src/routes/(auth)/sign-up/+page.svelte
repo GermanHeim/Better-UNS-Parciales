@@ -1,4 +1,3 @@
-<!-- TODO: Logica de confirmar contraseña -->
 <!-- TODO: Progresive forms -->
 
 <div class="flex flex-col h-full items-center w-full justify-center">

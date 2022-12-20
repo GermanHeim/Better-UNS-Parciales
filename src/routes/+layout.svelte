@@ -54,6 +54,7 @@
 
 	import { Modal, modalStore } from '@skeletonlabs/skeleton';
 	import buscarModal from '$lib/buscarModal.svelte';
+	import subirParcialModal from '$lib/subirParcialModal.svelte';
 
 	function triggerSearch() {
 		const c = { ref: buscarModal };
@@ -63,14 +64,32 @@
 		};
 		modalStore.trigger(d);
 	}
+
+	function modalComponentForm() {
+		const e = { ref: subirParcialModal };
+		const g = {
+			type: 'component',
+			title: 'Subir un archivo a ' + materia_actual,
+			component: e
+		};
+		modalStore.trigger(g);
+	}
+
+	let materia_actual;
 </script>
 
 <Toaster />
 <Modal />
-<Drawer class="backdrop-blur-sm" width="w-96">
+<Drawer class="backdrop-blur-sm" width="w-4/5">
+	<div class="absolute top-0 right-[20%] p-4">
+		<button class="btn btn-sm" on:click={drawerClose}>
+			<span>x</span>
+		</button>
+	</div>
+
 	<h2 class="p-4"><strong>Navegación</strong></h2>
 	<hr />
-	<nav class="list-nav p-4">
+	<nav class="flex flex-col list-nav p-4">
 		<ul>
 			<li><a href="/" on:click={drawerClose}>Inicio</a></li>
 			{#if !data.user}
@@ -79,7 +98,6 @@
 			{:else}
 				<li><a href="/log-out" on:click={drawerClose}>Cerrar sesión</a></li>
 			{/if}
-			<li><a on:click={drawerClose} on:click={() => triggerSearch()}>Buscar</a></li>
 			<li><a href="/materia" on:click={drawerClose}>Materias</a></li>
 			<li><a href="/subir-un-parcial" on:click={drawerClose}>Subir un parcial</a></li>
 			<li>
@@ -87,9 +105,12 @@
 					>GitHub</a
 				>
 			</li>
+			<li class="absolute bottom-0 left-3 p-4">
+				<LightSwitch />
+			</li>
 		</ul>
-	</nav>
-</Drawer>
+	</nav></Drawer
+>
 
 <!-- App Shell -->
 <AppShell slotSidebarLeft="bg-surface-500/5">
@@ -103,11 +124,16 @@
 							<Icon src={FiMenu} />
 						</span>
 					</button>
-					<h1 class="text-xl"><strong>Better UNS Parciales</strong></h1>
+					<h1 class="text-lg"><strong>Better UNS Parciales</strong></h1>
 				</div>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<div class="flex items-center"><LightSwitch /></div>
+				<button class="btn btn-sm bg-zinc-700" on:click={() => triggerSearch()}>
+					<span>
+						<Icon src={FiSearch} />
+					</span>
+					<span>Buscar</span>
+				</button>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
@@ -153,20 +179,30 @@
 						value={'materias'}
 						on:click={() => goto(`/materias`)}><Icon src={FiArchive} size="22" /></AppRailTile
 					>
-					<AppRailTile
-						label="Subir un parcial"
-						title="Subir un parcial"
-						value={'subir-un-parcial'}
-						on:click={() => goto(`/subir-un-parcial`)}
-						><Icon src={FiUploadCloud} size="22" />
-					</AppRailTile>
+					{#if $page.url.pathname.includes('materias/')}
+						<AppRailTile
+							label="Subir un parcial"
+							title="Subir un parcial"
+							value={'subir-un-parcial'}
+							on:click={() => modalComponentForm()}
+							><Icon src={FiUploadCloud} size="22" />
+						</AppRailTile>
+					{:else}
+						<AppRailTile
+							label="Subir un parcial"
+							title="Subir un parcial"
+							value={'subir-un-parcial'}
+							on:click={() => goto(`/subir-un-parcial`)}
+							><Icon src={FiUploadCloud} size="22" />
+						</AppRailTile>
+					{/if}
 				</svelte:fragment>
 				<svelte:fragment slot="trail"
 					><AppRailTile title="Lightswitch"><LightSwitch /></AppRailTile>
 					<AppRailTile
 						label="GitHub"
 						title="GitHub"
-						on:click={() => goto(`https://github.com/GermanHeim/better-unsparciales`)}
+						on:click={() => goto(`https://github.com/GermanHeim/Better-UNS-Parciales`)}
 						><Icon src={FiGithub} size="22" /></AppRailTile
 					>
 				</svelte:fragment>

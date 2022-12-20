@@ -1,11 +1,14 @@
 <script>
 	export let form;
-	import { Alert } from '@skeletonlabs/skeleton';
-	import Icon from 'svelte-icons-pack/Icon.svelte';
-	import FiAlertCircle from 'svelte-icons-pack/fi/FiAlertCircle';
 	import { enhance } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	let loading = false;
+
+	$: if (form?.notVerified) {
+		toast.error('Por favor, verifica tu cuenta antes de iniciar sesión', {
+			position: 'bottom-center'
+		});
+	}
 
 	const submitLogin = () => {
 		loading = true;
@@ -15,11 +18,15 @@
 					await update();
 					break;
 				case 'invalid':
-					toast.error('Credenciales inválidas');
+					toast.error('Credenciales inválidas', {
+						position: 'bottom-center'
+					});
 					await update();
 					break;
 				case 'error':
-					toast.error(result.error.message);
+					toast.error(result.error.message, {
+						position: 'bottom-center'
+					});
 					break;
 				default:
 					await update();
@@ -30,13 +37,6 @@
 </script>
 
 <div class="overflow-hidden h-full">
-	{#if form?.notVerified}
-		<Alert visible="true" class="w-full top-0">
-			<svelte:fragment slot="lead"><Icon src={FiAlertCircle} /></svelte:fragment>
-			<svelte:fragment slot="title">Error</svelte:fragment>
-			<span>Por favor, verifica tu cuenta antes de iniciar sesión</span>
-		</Alert>
-	{/if}
 	<div class="flex flex-col h-full  items-center w-full justify-center">
 		<div
 			class="flex flex-col w-full h-full card card-body rounded-none p-10 md:p-4 md:h-auto md:w-auto md:rounded-md lg:rounded-xl"
@@ -60,6 +60,7 @@
 							class="form-input px-4 py-3 rounded-lg w-auto md:w-96"
 							placeholder="johndoe@gmail.com"
 							required
+							disabled={loading}
 						/>
 					</label>
 
@@ -71,6 +72,7 @@
 							placeholder="****************"
 							class="form-input px-4 py-3 rounded-lg w-auto md:w-96"
 							required
+							disabled={loading}
 						/>
 					</label>
 
@@ -79,7 +81,10 @@
 						class="btn bg-primary-500 btn-xl text-white w-full"
 						disabled={loading}>Iniciar sesión</button
 					>
-					<a href="/recuperar-contraseña">Olvidaste tu contraseña?</a>
+					{#if form?.notVerified}
+						<a href="/reenviar-verificacion">Reenviar correo de verificación</a>
+					{/if}
+					<a href="/restablecer-contraseña">Olvidaste tu contraseña?</a>
 				</form>
 			</div>
 		</div>

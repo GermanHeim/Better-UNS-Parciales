@@ -1,11 +1,11 @@
 import { error } from '@sveltejs/kit';
 
 export const actions = {
-	recuperarContraseña: async ({ request, locals }) => {
+	reenviarVerificacion: async ({ request, locals }) => {
 		const body = Object.fromEntries(await request.formData());
 
 		try {
-			await locals.pb.collection('users').requestPasswordReset(body.email);
+			await locals.pb.collection('users').requestVerification(body.email);
 			return {
 				success: true
 			};

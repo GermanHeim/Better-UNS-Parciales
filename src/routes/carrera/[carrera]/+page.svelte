@@ -20,8 +20,6 @@
 			materias_con_archivos.push(data.parciales[i].materia);
 		}
 	}
-
-	console.log(materias_con_archivos);
 </script>
 
 <svelte:head>
@@ -29,7 +27,7 @@
 	<meta property="og:title" content="{carrera_actual} - Better UNS Parciales" />
 </svelte:head>
 
-<h2 class="text-center pt-10 pb-5"><strong>{carrera_actual}</strong></h2>
+<h2 class="text-center pt-7 pb-3"><strong>{carrera_actual}</strong></h2>
 
 <ul class="px-8 py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 	{#each materias as materia}
