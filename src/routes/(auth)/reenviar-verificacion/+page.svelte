@@ -31,7 +31,7 @@
 		class="flex flex-col w-full h-full card card-body rounded-none p-10 md:p-4 md:h-auto md:w-auto md:rounded-md lg:rounded-xl"
 	>
 		<div class="m-auto">
-			<h1 class="text-center m-4"><strong>Recuperar contraseña</strong></h1>
+			<h1 class="text-center m-4"><strong>Reenviar verificación</strong></h1>
 			<p class="text-center m-4">Le reenviaremos un correo electrónico para verificar su cuenta</p>
 			<form
 				action="?/reenviarVerificacion"
