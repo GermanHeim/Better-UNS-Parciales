@@ -17,6 +17,7 @@
 	import FiArchive from 'svelte-icons-pack/fi/FiArchive';
 	import FiUploadCloud from 'svelte-icons-pack/fi/FiUploadCloud';
 	import FiSearch from 'svelte-icons-pack/fi/FiSearch';
+	import FiBookmark from 'svelte-icons-pack/fi/FiBookmark';
 
 	// Skeleton Features
 	import { AppShell, AppBar, AppRail, AppRailTile } from '@skeletonlabs/skeleton';
@@ -97,6 +98,7 @@
 				<li><a href="/sign-up" on:click={drawerClose}>Registrarse</a></li>
 			{:else}
 				<li><a href="/log-out" on:click={drawerClose}>Cerrar sesión</a></li>
+				<li><a href="/favoritos" on:click={drawerClose}>Favoritos</a></li>
 			{/if}
 			<li><a href="/materia" on:click={drawerClose}>Materias</a></li>
 			<li><a href="/subir-un-parcial" on:click={drawerClose}>Subir un parcial</a></li>
@@ -143,28 +145,50 @@
 		<div class="w-0 md:h-full md:w-auto">
 			<AppRail selected={storeValue}>
 				<svelte:fragment slot="default">
-					<AppRailTile label="Inicio" title="Inicio" value={'home'} on:click={() => goto(`/`)}
-						><Icon src={FiHome} size="22" /></AppRailTile
+					<AppRailTile
+						label="Inicio"
+						title="Inicio"
+						value={'home'}
+						tag="a"
+						class="!text-white !no-underline !text-center"
+						href="/"><Icon src={FiHome} size="22" /></AppRailTile
 					>
 					{#if !data.user}
 						<AppRailTile
 							label="Iniciar sesion"
 							title="Iniciar sesion"
 							value={'login'}
-							on:click={() => goto(`/login`)}><Icon src={FiLogIn} size="22" /></AppRailTile
+							tag="a"
+							class="!text-white !no-underline !text-center"
+							href="/login"
+							}><Icon src={FiLogIn} size="22" /></AppRailTile
 						>
 						<AppRailTile
 							label="Registrarse"
 							title="Tile"
 							value={'sign-up'}
-							on:click={() => goto(`/sign-up`)}><Icon src={FiUserPlus} size="22" /></AppRailTile
+							tag="a"
+							class="!text-white !no-underline !text-center"
+							href="/sign-up"
+							}><Icon src={FiUserPlus} size="22" /></AppRailTile
 						>
 					{:else}
 						<AppRailTile
 							label="Cerrar sesion"
 							title="Cerrar sesion"
-							on:click={() => goto(`/logout`)}
+							tag="a"
+							class="!text-white !no-underline !text-center"
+							href="/logout"
 							><Icon src={FiLogOut} size="22" />
+						</AppRailTile>
+						<AppRailTile
+							label="Favoritos"
+							title="Favoritos"
+							value={'favoritos'}
+							tag="a"
+							class="!text-white !no-underline !text-center"
+							href="/favoritos"
+							><Icon src={FiBookmark} size="22" />
 						</AppRailTile>
 					{/if}
 					<AppRailTile
@@ -176,8 +200,9 @@
 					<AppRailTile
 						label="Materias"
 						title="Materias"
-						value={'materias'}
-						on:click={() => goto(`/materias`)}><Icon src={FiArchive} size="22" /></AppRailTile
+						tag="a"
+						class="!text-white !no-underline !text-center"
+						href="/materias"><Icon src={FiArchive} size="22" /></AppRailTile
 					>
 					{#if $page.url.pathname.includes('materias/')}
 						<AppRailTile
@@ -192,7 +217,9 @@
 							label="Subir un parcial"
 							title="Subir un parcial"
 							value={'subir-un-parcial'}
-							on:click={() => goto(`/subir-un-parcial`)}
+							tag="a"
+							class="!text-white !no-underline !text-center"
+							href="/subir-un-parcial"
 							><Icon src={FiUploadCloud} size="22" />
 						</AppRailTile>
 					{/if}
@@ -202,7 +229,9 @@
 					<AppRailTile
 						label="GitHub"
 						title="GitHub"
-						on:click={() => goto(`https://github.com/GermanHeim/Better-UNS-Parciales`)}
+						tag="a"
+						class="!text-white !no-underline !text-center"
+						href="https://github.com/GermanHeim/Better-UNS-Parciales"
 						><Icon src={FiGithub} size="22" /></AppRailTile
 					>
 				</svelte:fragment>
