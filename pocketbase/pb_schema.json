@@ -1466,5 +1466,45 @@
     "updateRule": null,
     "deleteRule": null,
     "options": {}
+  },
+  {
+    "id": "jklncltt0i6ix26",
+    "name": "favoritos",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "tlavyup3",
+        "name": "user",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "hbl3seys",
+        "name": "parcial",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "collectionId": "ficpm89nv0m0ppr",
+          "cascadeDelete": true
+        }
+      }
+    ],
+    "listRule": "@request.auth.id = user.id",
+    "viewRule": "@request.auth.id = user.id",
+    "createRule": "@request.auth.id != \"\" && @request.auth.id = @request.auth.user",
+    "updateRule": null,
+    "deleteRule": "@request.auth.id = @request.auth.user",
+    "options": {}
   }
 ]

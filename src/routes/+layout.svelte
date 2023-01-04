@@ -4,7 +4,6 @@
 	import '../theme.postcss';
 	import '../app.postcss';
 	import { writable } from 'svelte/store';
-	import { goto } from '$app/navigation';
 
 	// Icons
 	import Icon from 'svelte-icons-pack/Icon.svelte';
@@ -160,8 +159,7 @@
 							value={'login'}
 							tag="a"
 							class="!text-white !no-underline !text-center"
-							href="/login"
-							}><Icon src={FiLogIn} size="22" /></AppRailTile
+							href="/login"><Icon src={FiLogIn} size="22" /></AppRailTile
 						>
 						<AppRailTile
 							label="Registrarse"
@@ -169,8 +167,7 @@
 							value={'sign-up'}
 							tag="a"
 							class="!text-white !no-underline !text-center"
-							href="/sign-up"
-							}><Icon src={FiUserPlus} size="22" /></AppRailTile
+							href="/sign-up"><Icon src={FiUserPlus} size="22" /></AppRailTile
 						>
 					{:else}
 						<AppRailTile
