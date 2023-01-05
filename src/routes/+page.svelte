@@ -5,6 +5,9 @@
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} />
+<svelte:head>
+	<title>Better UNS Parciales</title>
+</svelte:head>
 
 <h2 class="text-center pt-8 pb-4 hidden md:block">
 	<strong>Better UNS Parciales</strong>

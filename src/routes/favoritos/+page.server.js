@@ -10,3 +10,15 @@ export const load = ({ locals }) => {
 		favoritos: getFavoritos(locals)
 	};
 };
+
+export const actions = {
+	desfavorito: async ({ locals, request }) => {
+		try {
+			const body = await request.formData();
+			await locals.pb.collection('favoritos').delete(body.get('favoritoID'));
+		} catch (err) {
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
+		}
+	}
+};

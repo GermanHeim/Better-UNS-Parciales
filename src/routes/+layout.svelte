@@ -149,7 +149,7 @@
 						title="Inicio"
 						value={'home'}
 						tag="a"
-						class="!text-white !no-underline !text-center"
+						class="!text-black dark:!text-white !no-underline !text-center"
 						href="/"><Icon src={FiHome} size="22" /></AppRailTile
 					>
 					{#if !data.user}
@@ -158,7 +158,7 @@
 							title="Iniciar sesion"
 							value={'login'}
 							tag="a"
-							class="!text-white !no-underline !text-center"
+							class="!text-black dark:!text-white !no-underline !text-center"
 							href="/login"><Icon src={FiLogIn} size="22" /></AppRailTile
 						>
 						<AppRailTile
@@ -166,7 +166,7 @@
 							title="Tile"
 							value={'sign-up'}
 							tag="a"
-							class="!text-white !no-underline !text-center"
+							class="!text-black dark:!text-white !no-underline !text-center"
 							href="/sign-up"><Icon src={FiUserPlus} size="22" /></AppRailTile
 						>
 					{:else}
@@ -174,7 +174,7 @@
 							label="Cerrar sesion"
 							title="Cerrar sesion"
 							tag="a"
-							class="!text-white !no-underline !text-center"
+							class="!text-black dark:!text-white !no-underline !text-center"
 							href="/logout"
 							><Icon src={FiLogOut} size="22" />
 						</AppRailTile>
@@ -183,7 +183,7 @@
 							title="Favoritos"
 							value={'favoritos'}
 							tag="a"
-							class="!text-white !no-underline !text-center"
+							class="!text-black dark:!text-white !no-underline !text-center"
 							href="/favoritos"
 							><Icon src={FiBookmark} size="22" />
 						</AppRailTile>
@@ -197,8 +197,9 @@
 					<AppRailTile
 						label="Materias"
 						title="Materias"
+						value={'materias'}
 						tag="a"
-						class="!text-white !no-underline !text-center"
+						class="!text-black dark:!text-white !no-underline !text-center"
 						href="/materias"><Icon src={FiArchive} size="22" /></AppRailTile
 					>
 					{#if $page.url.pathname.includes('materias/')}
@@ -215,7 +216,7 @@
 							title="Subir un parcial"
 							value={'subir-un-parcial'}
 							tag="a"
-							class="!text-white !no-underline !text-center"
+							class="!text-black dark:!text-white !no-underline !text-center"
 							href="/subir-un-parcial"
 							><Icon src={FiUploadCloud} size="22" />
 						</AppRailTile>
@@ -227,7 +228,7 @@
 						label="GitHub"
 						title="GitHub"
 						tag="a"
-						class="!text-white !no-underline !text-center"
+						class="!text-black dark:!text-white !no-underline !text-center"
 						href="https://github.com/GermanHeim/Better-UNS-Parciales"
 						><Icon src={FiGithub} size="22" /></AppRailTile
 					>

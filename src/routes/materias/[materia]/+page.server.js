@@ -17,11 +17,28 @@ export const load = ({ locals, params }) => {
 		}
 	};
 
+		const getFavoritos = async () => {
+			if (locals.user) {
+				try {
+					const favoritos = serializeNonPOJOs(
+						await locals.pb.collection('favoritos').getFullList(undefined, {
+							sort: '-created',
+						})
+					);
+					return favoritos;
+				} catch (err) {
+					console.log('Error: ', err);
+					throw error(err.status, err.message);
+				}
+			}
+		};
+
 	return {
-		parciales: getParciales(params.materia)
+		parciales: getParciales(params.materia),
+		favoritos: getFavoritos(locals.user.id),
 	};
 };
-
+	
 export const actions = {
 	subir: async ({ request, params, locals }) => {
         const body = await request.formData();
@@ -32,5 +49,22 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(err.status, err.message);
 		}
-	}
+	},
+
+	favorito: async ({ locals, request }) => {
+		try {
+			const body = await request.formData();
+			const favoritoID = body.get('favoritoID');
+			if (favoritoID) {
+				await locals.pb.collection('favoritos').delete(favoritoID);
+				return;
+			}
+			const parcial = await locals.pb.collection('parciales').getOne(body.get('parcialID'));
+			let data_fav = { user: locals.user.id, parcial: parcial.id };
+			await locals.pb.collection('favoritos').create(data_fav);
+		} catch (err) {
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
+		}
+	},
 };

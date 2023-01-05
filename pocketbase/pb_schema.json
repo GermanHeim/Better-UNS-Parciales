@@ -1502,9 +1502,9 @@
     ],
     "listRule": "@request.auth.id = user.id",
     "viewRule": "@request.auth.id = user.id",
-    "createRule": "@request.auth.id != \"\" && @request.auth.id = @request.auth.user",
+    "createRule": "@request.auth.id != \"\" && @request.auth.id = user.id",
     "updateRule": null,
-    "deleteRule": "@request.auth.id = @request.auth.user",
+    "deleteRule": "@request.auth.id = user.id",
     "options": {}
   }
 ]
