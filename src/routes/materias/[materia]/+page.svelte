@@ -22,12 +22,12 @@
 
 	function formatDate(date) {
 		var d = new Date(date),
+			day = '' + (d.getDate() + 1),
 			month = '' + (d.getMonth() + 1),
-			day = '' + d.getDate(),
 			year = d.getFullYear();
 
-		if (month.length < 2) month = '0' + month;
 		if (day.length < 2) day = '0' + day;
+		if (month.length < 2) month = '0' + month;
 
 		return [day, month, year].join('/');
 	}
@@ -35,15 +35,20 @@
 	export let data;
 
 	$: isFavorito = (parcialID) => {
-		for (let i = 0; i < data.favoritos.length; i++) {
-			if (data.favoritos[i].parcial == parcialID) {
-				return true;
+		if (data.favoritos) {
+			for (let i = 0; i < data.favoritos.length; i++) {
+				if (data.favoritos[i].parcial == parcialID) {
+					return true;
+				}
 			}
 		}
 	};
 
 	const saveZip = (urls) => {
 		if (!urls) return;
+		urls = urls.map(
+			(url) => `${pocketbase_url}/api/files/parciales/${data.parciales[0].id}/${url}`
+		);
 
 		const zip = new JSZip();
 		const folder = zip.folder(`parcial-${str2slug(materia_actual)}`);
@@ -91,56 +96,74 @@
 
 {#if data.parciales.length != 0}
 	<form action="?/favorito" method="POST" />
-	<h3 class="text-center pt-7 pb-3"><strong>{materia_actual}</strong></h3>
-	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+	<h2 class="text-center pt-7 pb-3"><strong>{materia_actual}</strong></h2>
+	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 		{#each data.parciales as parcial, i}
-			<div class="card card-body p-4 h-96 flex flex-col justify-between">
-				{#if parcial.numero != 0}
-					{#if parcial.tipo != 0}
+			<div class="card card-body p-4 flex flex-col justify-between">
+				{#if parcial.numero}
+					{#if parcial.tipo}
 						<h3 class="capitalize text-center pb-4">
 							<strong>{parcial.tipo} N° {parcial.numero}</strong>
 						</h3>
 					{/if}
-				{:else if parcial.tipo != 0}
+				{:else if parcial.tipo}
 					<h3 class="capitalize text-center pb-4"><strong>{parcial.tipo}</strong></h3>
 				{:else}
 					<h3 class="capitalize text-center pb-4"><strong>Documento</strong></h3>
 				{/if}
-				<div class="grid grid-cols-2 bg-gray-800 rounded-lg p-6 bg-opacity-80">
+				<div class="bg-gray-800 rounded-lg p-6 bg-opacity-80">
 					<div>
-						{#if parcial.profesor != 0}
-							<p class="text-sm !text-gray-100">Profesor</p>
+						{#if parcial.profesor}
+							<div
+								class="flex flex-row justify-between border-b border-gray-400 dark:border-gray-700 space-x-7"
+							>
+								<p class="text-sm !text-gray-100">Profesor</p>
+								<p class="capitalize !text-gray-100 text-end">
+									{parcial.profesor}
+								</p>
+							</div>
 						{/if}
-						{#if parcial.tipo != 0}
-							<p class="text-sm !text-gray-100">Tipo</p>
+						{#if parcial.tipo}
+							<div
+								class="flex flex-row justify-between border-b  border-gray-400 dark:border-gray-700 space-x-7"
+							>
+								<p class="text-sm !text-gray-100">Tipo</p>
+								<p class="capitalize !text-gray-100 text-end">
+									{parcial.tipo}
+								</p>
+							</div>
 						{/if}
-						{#if parcial.fecha != 0}
-							<p class="text-sm !text-gray-100">Fecha</p>
+						{#if parcial.fecha}
+							<div
+								class="flex flex-row justify-between border-b  border-gray-400 dark:border-gray-700 space-x-7"
+							>
+								<p class="text-sm !text-gray-100">Fecha</p>
+								<p class="capitalize !text-gray-100 text-end">
+									{formatDate(parcial.fecha)}
+								</p>
+							</div>
 						{/if}
 						{#if parcial.archivos.length > 1}
-							<p class="text-sm !text-gray-100">Archivos</p>
+							<div
+								class="flex flex-row justify-between border-b  border-gray-400 dark:border-gray-700 space-x-7"
+							>
+								<p class="text-sm !text-gray-100">Archivos</p>
+								<p class="text-sm !text-gray-100 text-end">{parcial.archivos.length}</p>
+							</div>
 						{/if}
-						{#if parcial.descripcion != 0}
-							<p class="text-sm !text-gray-100">Descripción</p>
-						{/if}
-					</div>
-					<div class="justify-self-end text-right">
-						<p class="capitalize !text-gray-100">
-							{parcial.profesor}
-						</p>
-						<p class="capitalize text-sm !text-gray-100">{parcial.tipo}</p>
-						{#if parcial.fecha != 0}
-							<p class="text-sm !text-gray-100">{formatDate(parcial.fecha)}</p>
-						{/if}
-						{#if parcial.archivos.length > 1}
-							<p class="text-sm !text-gray-100">{parcial.archivos.length}</p>
-						{/if}
-						{#if parcial.fecha != 0}
-							<p class="text-sm !text-white">{parcial.descripcion}</p>
+						{#if parcial.descripcion}
+							<div
+								class="flex flex-row justify-between border-b  border-gray-400 dark:border-gray-700 space-x-7"
+							>
+								<p class="text-sm !text-gray-100">Descripción</p>
+								<p class="!text-gray-100 text-end">
+									{parcial.descripcion}
+								</p>
+							</div>
 						{/if}
 					</div>
 				</div>
-				<div class="flex flex-col ">
+				<div class="flex flex-col">
 					{#if parcial.archivos.length > 1}
 						<button
 							class="btn bg-primary-500 btn-xl text-white w-full mt-5 flex flex-row gap-3"
@@ -217,9 +240,11 @@
 	</div>
 {:else}
 	<div class="h-screen flex flex-col">
-		<h3 class="text-center pt-7 pb-3"><strong>{materia_actual}</strong></h3>
+		<h2 class="text-center pt-7 pb-3"><strong>{materia_actual}</strong></h2>
 		<div class="px-8 py-5 flex flex-col justify-center items-center pb-40 h-screen">
-			<h4 class="pb-4 text-xl">Lo sentimos, todavia no contamos con archivos de esta materia 😢</h4>
+			<h4 class="pb-4 text-xl text-center">
+				Lo sentimos, todavia no contamos con archivos de esta materia 😢
+			</h4>
 			<p class="text-center !text-xl">
 				¿Queres ayudarnos a completar la base de datos? <br />
 				Podes subir archivos

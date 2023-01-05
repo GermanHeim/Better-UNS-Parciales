@@ -23,13 +23,16 @@
 		>
 			<div class="justify-items-center grid grid-cols-2 gap-2">
 				<label for="tipo" class="flex flex-col">
-					Tipo
+					Tipo*
 					<select class="form-input px-4 py-2 rounded-lg w-24 md:w-64" name="tipo">
+						<option hidden selected disabled>Selecciona una opción</option>
 						<option value="parcial">Parcial</option>
 						<option value="final regular">Final regular</option>
 						<option value="coloquio">Coloquio</option>
 						<option value="recuperatorio">Recuperatorio</option>
 						<option value="final libre">Final libre</option>
+						<option value="resumen">Resumen</option>
+						<option value="documento">Documento</option>
 					</select>
 				</label>
 				<label for="numero" class="flex flex-col">
@@ -63,6 +66,7 @@
 				Descripcion <textarea
 					placeholder="Agrega una descripcion del archivo. No es requerido."
 					name="descripcion"
+					maxlength="128"
 					class="form-input px-4 py-2 rounded-lg w-full"
 				/></label
 			>

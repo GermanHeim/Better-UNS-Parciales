@@ -64,6 +64,11 @@
 	<div class="px-8 py-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
 		{#each data.favoritos as favorito, i}
 			<div class="card card-body p-4 h-96 flex flex-col justify-between">
+				<a href="/materias/{favorito.expand.parcial.materia}" class="flex flex-row justify-center"
+					>{#each materias as materia}
+						{#if str2slug(materia) == favorito.expand.parcial.materia} {materia} {/if}
+					{/each}</a
+				>
 				{#if favorito.expand.parcial.numero != 0}
 					{#if favorito.expand.parcial.tipo != 0}
 						<h3 class="capitalize text-center pb-4">

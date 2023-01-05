@@ -35,7 +35,7 @@ export const load = ({ locals, params }) => {
 
 	return {
 		parciales: getParciales(params.materia),
-		favoritos: getFavoritos(locals.user.id),
+		favoritos: getFavoritos(locals.user)
 	};
 };
 	

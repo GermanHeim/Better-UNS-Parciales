@@ -69,13 +69,11 @@
 		const e = { ref: subirParcialModal };
 		const g = {
 			type: 'component',
-			title: 'Subir un archivo a ' + materia_actual,
+			title: 'Subir archivos',
 			component: e
 		};
 		modalStore.trigger(g);
 	}
-
-	let materia_actual;
 </script>
 
 <Toaster />
@@ -101,13 +99,13 @@
 			{/if}
 			<li><a href="/materia" on:click={drawerClose}>Materias</a></li>
 			<li><a href="/subir-un-parcial" on:click={drawerClose}>Subir un parcial</a></li>
-			<li>
-				<a href="https://github.com/GermanHeim/better-uns-parciales" on:click={drawerClose}
-					>GitHub</a
-				>
-			</li>
 			<li class="absolute bottom-0 left-3 p-4">
 				<LightSwitch />
+			</li>
+			<li class="absolute bottom-0 left-20 p-2">
+				<a href="https://github.com/GermanHeim/Better-UNS-Parciales" on:click={drawerClose}
+					><Icon src={FiGithub} size="22" /></a
+				>
 			</li>
 		</ul>
 	</nav></Drawer
@@ -142,7 +140,12 @@
 	<!-- Left Sidebar Slot -->
 	<svelte:fragment slot="sidebarLeft">
 		<div class="w-0 md:h-full md:w-auto">
-			<AppRail selected={storeValue}>
+			<AppRail
+				selected={storeValue}
+				background="bg-gray-200 dark:bg-surface-600"
+				hover="transition-all bg-primary-hover-token"
+				class="border-r border-gray-700 dark:border-gray-400"
+			>
 				<svelte:fragment slot="default">
 					<AppRailTile
 						label="Inicio"
@@ -239,4 +242,11 @@
 
 	<!-- Page Route Content -->
 	<slot />
+	<svelte:fragment slot="pageFooter">
+		<div
+			class="w-full py-2 px-8 flex flex-row bg-gray-200 dark:bg-surface-600 text-center justify-center md:justify-start border-t border-gray-700 dark:border-gray-400"
+		>
+			<a href="/privacidad">Política de privacidad</a>
+		</div>
+	</svelte:fragment>
 </AppShell>
