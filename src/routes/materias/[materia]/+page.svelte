@@ -21,11 +21,13 @@
 	});
 
 	function formatDate(date) {
-		var d = new Date(date),
-			day = '' + (d.getDate() + 1),
-			month = '' + (d.getMonth() + 1),
-			year = d.getFullYear();
-
+		var dateArr = date.split('-');
+		var day = parseInt(dateArr[2]);
+		var month = parseInt(dateArr[1]) - 1;
+		var year = parseInt(dateArr[0]);
+		var d = new Date(year, month, day);
+		day = '' + d.getDate();
+		month = '' + (d.getMonth() + 1);
 		if (day.length < 2) day = '0' + day;
 		if (month.length < 2) month = '0' + month;
 
